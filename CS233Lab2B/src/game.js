@@ -7,6 +7,7 @@ class Game {
 #dice;
 #scoreDice;
 #scoringDice;
+#previousscore;
 
 
 
@@ -14,6 +15,7 @@ constructor() {
 this.#players = [];
 this.#currentPlayerIndex = 0;
 this.#dice = [];
+this.#previousscore = 0;
 this.#scoreDice = [];
 this.#scoringDice = [];
 this.#dice.push(new Die());
@@ -78,6 +80,7 @@ CalculateScore(){
      let points = 0;
      let done = false;
      let triples = 0;
+    
     for (let i = 0; i < this.#scoreDice.length; i++) {
         let results = this.#scoreDice[i].value;
         this.#scoringDice.push(results);
@@ -180,10 +183,27 @@ if (one == 1 && two == 1 && three == 1
                 if (one == 1 && done == false) {points = points + 100; done = true;}
                 
                 
+                
+                for(let i = 0; i < this.#scoringDice.length;){
+                    let removedDice = this.#scoringDice.splice(i, 1);
 
 
 
+                }
+                console.log(this.#scoringDice);
 
+                
+                if (one > 0){one = 0;}
+                if (two > 0){two = 0;}
+                if (three > 0){three = 0;}
+                if (four > 0){four = 0;}
+                if (five > 0){five = 0;}
+                if (six > 0){six = 0;}
+                if (triples > 0) {triples = 0;}
+
+              
+                points = points + this.#previousscore;
+                this.#previousscore = points; 
 
 
                 
@@ -191,6 +211,7 @@ if (one == 1 && two == 1 && three == 1
                 
                 return points;
 
+                
 
 
 
@@ -198,13 +219,11 @@ if (one == 1 && two == 1 && three == 1
                 }
 
  
-clearDice(){
-    /*for(let i = 1; i < this.#scoreDice.length;){
-    this.#scoreDice.splice(index, 0);
-    }*/
+clearScoredDice(index){
+    let removedDice = this.#scoreDice.splice(index, 1);
+    
 
-
-}      
+}     
     
 }
 

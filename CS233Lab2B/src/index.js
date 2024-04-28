@@ -54,6 +54,15 @@ function setAside() {
     .src = `images/die${value}.png`;
 }
 
+function clearDice(){
+    document.getElementById(`scored${farkelGame.scoreDice.length - 1}`).src = "";
+    farkelGame.clearScoredDice(`scored${Number(this.id)}`);
+    displayDice();
+    
+    
+    
+}
+
 function displayDice() {
     let values = farkelGame.getDiceValues();
     for (let i = 0; i < NUMBER_OF_DIE; i++) {
@@ -76,10 +85,13 @@ function updateBoard(){
         
     }
     if(player.number == 2) {
-        document.getElementById("Player1CurrentScore").innerText = `Current Score: ${points}`;
+        document.getElementById("Player2CurrentScore").innerText = `Current Score: ${points}`;
         
     }
-    farkelGame.clearDice();
+    for (let i = 0; i < farkelGame.scoreDice.length; i++) {
+        document.getElementById(`scored${i}`).addEventListener("click", clearDice);;
+    }
+
   
 }
 
